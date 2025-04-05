@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nick & Andy – Contagem</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background-color: #0f0f0f;
+      color: #fff;
+      overflow: hidden;
+      height: 100vh;
+      position: relative;
+    }
+
+    #tsparticles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #e50914;
+      animation: fadePulse 4s infinite alternate ease-in-out;
+      margin-bottom: 40px;
+    }
+
+    @keyframes fadePulse {
+      0% { color: #e50914; }
+      100% { color: #000; }
+    }
+
+    /* Mantém os elementos juntos */
+    #names-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .name {
+      font-size: 2.5rem;
+      font-weight: bold;
+      transition: color 1s linear;
+      position: relative;
+      cursor: default;
+    }
+
+    /* Efeito de tooltip em estilo comics */
+    .name:hover::after {
+      content: "Ligados pelo fio vermelho do destino";
+      position: absolute;
+      bottom: 110%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      color: #ff0000;
+      padding: 5px 10px;
+      border: 1px solid #000;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      z-index: 10;
+      border-radius: 4px;
+      box-shadow: 2px 2px 0px #000;
+    }
+
+    /* Efeito de contorno para a letra que encosta na linha */
+    .letter {
+      -webkit-text-stroke: 1px rgb(255,200,200);
+      transition: -webkit-text-stroke 1s linear;
+    }
+
+    #line {
+      height: 4px;
+      background-color: #ff0000;
+      transition: width 1s linear;
+    }
+
+    #timer {
+      font-size: 1.2rem;
+      color: #ccc;
+      margin-top: 20px;
+    }
+
+    /* Centraliza o SVG do coração, removendo a animação anterior */
+    .heart {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="tsparticles"></div>
+
+  <div class="container">
+    <h1>Contagem para o reencontro</h1>
+
+    <div id="names-wrapper">
+      <!-- Para Nick, a última letra ("k") está envolvida pela classe "letter" -->
+      <div id="nick" class="name">Nic<span class="letter">k</span></div>
+      <div id="line" style="width: 200px;"></div>
+      <!-- Para Andy, a primeira letra ("A") está envolvida pela classe "letter" -->
+      <div id="andy" class="name"><span class="letter">A</span>ndy</div>
+    </div>
+
+    <div id="timer">Carregando...</div>
+    
+    <!-- Coração pixel 8-bit estilo Super Nintendo -->
+    <div class="heart">
+      <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style="image-rendering: pixelated;">
+        <!-- Row 0 -->
+        <rect x="4" y="0" width="4" height="4" fill="red"/>
+        <rect x="8" y="0" width="4" height="4" fill="red"/>
+        <rect x="20" y="0" width="4" height="4" fill="red"/>
+        <rect x="24" y="0" width="4" height="4" fill="red"/>
+        <!-- Row 1 -->
+        <rect x="0" y="4" width="4" height="4" fill="red"/>
+        <rect x="4" y="4" width="4" height="4" fill="red"/>
+        <rect x="8" y="4" width="4" height="4" fill="red"/>
+        <rect x="12" y="4" width="4" height="4" fill="red"/>
+        <rect x="16" y="4" width="4" height="4" fill="red"/>
+        <rect x="20" y="4" width="4" height="4" fill="red"/>
+        <rect x="24" y="4" width="4" height="4" fill="red"/>
+        <rect x="28" y="4" width="4" height="4" fill="red"/>
+        <!-- Row 2 -->
+        <rect x="0" y="8" width="4" height="4" fill="red"/>
+        <rect x="4" y="8" width="4" height="4" fill="red"/>
+        <rect x="8" y="8" width="4" height="4" fill="red"/>
+        <rect x="12" y="8" width="4" height="4" fill="red"/>
+        <rect x="16" y="8" width="4" height="4" fill="red"/>
+        <rect x="20" y="8" width="4" height="4" fill="red"/>
+        <rect x="24" y="8" width="4" height="4" fill="red"/>
+        <rect x="28" y="8" width="4" height="4" fill="red"/>
+        <!-- Row 3 -->
+        <rect x="0" y="12" width="4" height="4" fill="red"/>
+        <rect x="4" y="12" width="4" height="4" fill="red"/>
+        <rect x="8" y="12" width="4" height="4" fill="red"/>
+        <rect x="12" y="12" width="4" height="4" fill="red"/>
+        <rect x="16" y="12" width="4" height="4" fill="red"/>
+        <rect x="20" y="12" width="4" height="4" fill="red"/>
+        <rect x="24" y="12" width="4" height="4" fill="red"/>
+        <rect x="28" y="12" width="4" height="4" fill="red"/>
+        <!-- Row 4 -->
+        <rect x="4" y="16" width="4" height="4" fill="red"/>
+        <rect x="8" y="16" width="4" height="4" fill="red"/>
+        <rect x="12" y="16" width="4" height="4" fill="red"/>
+        <rect x="16" y="16" width="4" height="4" fill="red"/>
+        <rect x="20" y="16" width="4" height="4" fill="red"/>
+        <rect x="24" y="16" width="4" height="4" fill="red"/>
+        <!-- Row 5 -->
+        <rect x="8" y="20" width="4" height="4" fill="red"/>
+        <rect x="12" y="20" width="4" height="4" fill="red"/>
+        <rect x="16" y="20" width="4" height="4" fill="red"/>
+        <rect x="20" y="20" width="4" height="4" fill="red"/>
+        <!-- Row 6 -->
+        <rect x="12" y="24" width="4" height="4" fill="red"/>
+        <rect x="16" y="24" width="4" height="4" fill="red"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- tsParticles -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles-engine"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles-basic"></script>
+  <script>
+    tsParticles.load("tsparticles", {
+      fullScreen: { enable: false },
+      background: { color: "#0f0f0f" },
+      particles: {
+        number: { value: 80 },
+        color: { value: "#ffffff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.2 },
+        size: { value: 2 },
+        move: { enable: true, speed: 1 }
+      }
+    });
+  </script>
+
+  <script>
+    const destino = new Date('2025-08-05T00:00:00');
+    const inicio = new Date();
+
+    const nickEl = document.getElementById("nick");
+    const andyEl = document.getElementById("andy");
+    const lineEl = document.getElementById("line");
+
+    // Seleciona as letras destacadas
+    const nickLetter = document.querySelector("#nick .letter");
+    const andyLetter = document.querySelector("#andy .letter");
+
+    function atualizar() {
+      const agora = new Date();
+      const total = destino - inicio;
+      const restante = destino - agora;
+      const progresso = Math.min(1, (total - restante) / total);
+
+      const timer = document.getElementById("timer");
+
+      if (restante <= 0) {
+        timer.textContent = "É hoje! Nick e Andy juntos 💞";
+        nickEl.style.color = "#ff0000";
+        andyEl.style.color = "#ff0000";
+        nickLetter.style.webkitTextStroke = "1px #ff0000";
+        andyLetter.style.webkitTextStroke = "1px #ff0000";
+        lineEl.style.width = "0px";
+        return;
+      }
+
+      const dias = Math.floor(restante / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((restante % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((restante % (1000 * 60 * 60)) / (1000 * 60));
+      const segundos = Math.floor((restante % (1000 * 60)) / 1000);
+
+      timer.textContent = `${dias} dias, ${horas}h ${minutos}min ${segundos}s`;
+
+      // Atualiza a cor do texto dos nomes de branco para vermelho
+      const red = 255;
+      const greenBlue = Math.floor(255 * (1 - progresso));
+      const corTexto = `rgb(${red},${greenBlue},${greenBlue})`;
+      nickEl.style.color = corTexto;
+      andyEl.style.color = corTexto;
+
+      // Atualiza o contorno das letras de rgb(255,200,200) para rgb(255,0,0)
+      const strokeGB = Math.floor(200 * (1 - progresso));
+      const corStroke = `rgb(255,${strokeGB},${strokeGB})`;
+      nickLetter.style.webkitTextStroke = `1px ${corStroke}`;
+      andyLetter.style.webkitTextStroke = `1px ${corStroke}`;
+
+      // Linha encurtando: largura inicial de 200px
+      const larguraLinha = 200 * (1 - progresso);
+      lineEl.style.width = `${larguraLinha}px`;
+    }
+
+    setInterval(atualizar, 1000);
+    window.addEventListener("load", atualizar);
+  </script>
+</body>
+</html>
